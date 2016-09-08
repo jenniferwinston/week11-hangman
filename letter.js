@@ -1,24 +1,26 @@
 // `letter.js` should control whether or not a letter appears as a "_" or as itself on-screen.
 //pass in latter into function
-var Letter = function(latter) {
-	this.chara = latter;
-	console.log(latter);
+
+
+function Letter(character) {
+
+	this.character = character;
+	console.log(character);
+	this.placeholder = "_";
 	// appear false until proven true
 	this.appear = false;
+
 	this.letterIfs = function(){
+		var chara = " ";
 		if (this.appear == true){
-			return this.chara;
-		}
-		else if (this.chara === ' ') {
-			this.appear = true;
-			return this.chara;
+			chara= this.character;
 		}
 		else {
-			return " ";
+			chara this.placeholder;
 		}
-
+		return chara;
 	}
 };
 
 //export the constructor
-exports.Letter = Letter;
+module.exports = Letter;
