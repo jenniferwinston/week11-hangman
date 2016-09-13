@@ -16,17 +16,12 @@ function processInput(){
 		type: 'input',
 		name: 'userGuess';
 		message: 'Enter a letter a-z';
-		// validate user guess
-		validate: function(value){
-			var valid = /[a-z]/i;
-			if (value.length === 1 && valid.test(value)){
-				return true;
-			}
-			else { return 'Enter a valid guess'; }
-		}
 	}
 	]).then(function(answer){
-
+		if (game.letterUsed.indexOf(userGuess) === -1) {
+			game.letterUsed.push(userGuess);
+			var correct = game.word;
+		}
 	})
 }
 

@@ -19,4 +19,9 @@
 
 var letter = require('./letter.js');
 
-var wordBank= ['hersheys', 'almondjoy', 'reeses', 'snickers', 'milkyway', 'kitkat', 'twix'];
+function Word(target) {
+	this.target = target;
+	this.targetWord =target.split('');
+}
+
+module.exports = Word;

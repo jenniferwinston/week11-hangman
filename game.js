@@ -21,5 +21,17 @@ function Game(){
 		var random = wordBank[Math.floor(Math.random()* wordBank.length)];
 		var current = new Word(random);
 		return current;
+	};
+	this.printStats = function(str){
+		switch (str) {
+			case "correct": console.log('Correct'); break;
+			case "wrong": console.log('Incorrect'); break;
+		}
+	};
+
+	this.endGame = function(){
+		console.log("Wins: " + games.wins + " Losses: " + game.losses);
 	}
 }
+
+module.exports = Game;
