@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jenniferwinston/week11-hangman/issues"
   },
-  "homepage": "https://github.com/jenniferwinston/week11-hangman#readme"
+  "homepage": "https://github.com/jenniferwinston/week11-hangman#readme",
+  "dependencies": {
+    "prompt": "^1.0.0"
+  }
 }

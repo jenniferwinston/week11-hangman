@@ -2,25 +2,13 @@
 //pass in latter into function
 
 
-function Letter(character) {
-
-	this.character = character;
-	console.log(character);
-	this.placeholder = "_";
-	// appear false until proven true
+var letter = function(let){
+	this.charac = let;
 	this.appear = false;
-
-	this.letterIfs = function(){
-		var chara = " ";
-		if (this.appear == true){
-			chara= this.character;
-		}
-		else {
-			chara this.placeholder;
-		}
-		return chara;
-	}
+	this.letterRender = function(){
+		return !(this.appear) ? "_" : this.charac;
+	};
 };
 
 //export the constructor
-module.exports = Letter;
+module.exports = letter;
