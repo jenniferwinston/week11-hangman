@@ -1,29 +1,58 @@
 //`main.js` will contain the logic of your app. Running it in Terminal/Bash will start the game.
-var Game = require('./game.js');
-var inquirer = require('inquirer');
+var Word = require('./word.js');
+var prompt = require('prompt');
 
-var game = new Game();
+prompt.start();
 
-function startGame(){
-	game.startNewGame();
-	processInput();
-}
+game = {
+ 	wordBank: ['hersheys', 'almondjoy', 'reeses', 'snickers', 'milkyway', 'kitkat', 'twix'];
+ 	wordsWon: 0,
+ 	guessesRemaining: 10,
+ 	currentWrd: null,
+ 	
+ 	startGame: function (wrd) {
+ 		this.resetGuesses();
+ 		this.currentWrd = new Word(this.wordBank[Math.floor(Math.random()* this.wordBank.length)]);
+ 		this.currentWrd.getLet();
+ 		this.promptUser();
+ 	},
 
-function processInput(){
-	//prompts for the user
-	inquirer.prompt([
-	{
-		type: 'input',
-		name: 'userGuess';
-		message: 'Enter a letter a-z';
-	}
-	]).then(function(answer){
-		if (game.letterUsed.indexOf(userGuess) === -1) {
-			game.letterUsed.push(userGuess);
-			var correct = game.word;
-		}
-	})
-}
+ 	resetGuesses: function(){
+ 		this.guessesRemaining = 10;
+ 	},
 
-//start
-startGame();
+ 	promptUser: function(){
+ 		var self = this;
+ 		prompt.get(['guessLet'], function(err, result){
+ 			console.log("You guessed: " + result.guessLet);
+ 			var manyGuessed = self.currentWrd.letterFound(result.guessLet);
+
+ 			if(manyGuessed ==0) {
+ 				console.log("You guessed wrong");
+ 				self.guessesRemaining--;
+ 			} else {
+ 				console.log("You guessed correct");
+ 					if(self.currentWrd.foundWord()){
+ 						console.log("You won!");
+ 						return;
+ 					}
+ 			}
+
+ 			console.log("Guesses remaining: " + self.guessesRemaining);
+ 			console.log("Already guessed: ");
+ 			if((self.guessesRemaining > 0) && (self.currentWrd.found == false)){
+ 				self.promptUser();
+ 			}
+ 			else if(self.guessesRemaining ==0){
+ 				console.log("Game over. Correct Word ", self.currentWrd.word);
+ 			} else {
+ 				console.log(self.currentWrd.wordRender());
+ 			}
+ 		});
+
+ 	}
+
+
+};
+
+game.startGame();
